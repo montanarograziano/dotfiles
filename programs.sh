@@ -11,7 +11,8 @@ sudo snap install code --classic
 sudo snap install phpstorm --classic
 sudo snap install spotify
 
-#TODO -- Install Microsoft Teams
-# wget "link"
-#sudo apt install -y -/teams_1.3.00.30857_amd64.deb
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
+sudo apt update -y
+sudo apt install teams -y
 
