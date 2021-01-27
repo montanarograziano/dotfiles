@@ -7,7 +7,7 @@ PS: Alcuni steps sono opzionali in quanto dettati dalle MIE preferenze, che potr
 - vlc
 - dconf-editor
 - grub-customizer
-- ubuntu-restricted-extras (coded e MSFont)
+- ubuntu-restricted-extras (codec e MSFont)
 - ubuntu-restricted-addons
 - suite LibreOffice
 - git
