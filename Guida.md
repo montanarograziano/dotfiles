@@ -21,30 +21,12 @@ e attraverso Snap
  OPZIONALE: SE AVETE SCHEDE NVIDIA
 - Andate su Software e Aggiornamenti, e abilitate la prima voce 'Partner di Canonical' in Altro Software, successivamente in Driver Aggiuntivi, selezionate i driver Nvidia proprietari e testati e installateli.
 
-2) Andate su https://go.microsoft.com/fwlink/p/?LinkID=2112886&clcid=0x410&culture=it-it&country=IT
-dovrebbe partire il download di Microsoft Teams (non sono ancora riuscito ad automatizzarlo)
-aprite il package appena scaricato e installatelo
-
-3) Installare Github desktop
-Eseguite i seguenti comandi:
-
-wget -qO - https://packagecloud.io/shiftkey/desktop/gpgkey | sudo apt-key add -
-
-sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/shiftkey/desktop/any/ any main" > /etc/apt/sources.list.d/packagecloud-shiftky-desktop.list'
-
-sudo apt get update
-
-sudo apt install -y github-desktop
 
 4) OPZIONALE: Fixare il Caps Lock ( fatelo solo se da problemi)
    - mettete la cartella 'capslock-fixer-master' in home ( o dove preferite)
    - aprite 'Applicazioni d'avvio' e aggiungete un programma, alla voce "Comando" inserite 'sh '/home/VOSTRONOME/capslockfixer-master/fixer.sh'
    
 
-5) Attivare il Minimize al click su Dock
-   Di default, quando un app è aperta, cliccando sulla sua icona nella dock questa non verrà minimizzata (come Windows ad esempio). Per correggere ciò:
-   - aprite dconf-editor e cercate la voce click-action
-   - togliete la spunta a 'Usa valore predefinito' e cambiate con 'Minimize'
    
 6) Abilitare le Estensioni Gnome
    - Andate su: https://extensions.gnome.org/
