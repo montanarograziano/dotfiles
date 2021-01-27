@@ -9,7 +9,7 @@ The main scripts are the following:
 
 The first one is used to install several programs, along with the Yaru-Blue-dark theme from [Yaru Colors](https://www.gnome-look.org/p/1299514/)
 Also a set of wallpapers is add to the _/backgrounds_ folder, and one of them is set.
-Finally, a fix for a common _CAps LOck DElay BUg_ is made (See more [here](https://bugs.launchpad.net/ubuntu/+source/xorg-server/+bug/1376903)
+Finally, a fix for a common _CAps LOck DElay BUg_ is made (See more [here](https://bugs.launchpad.net/ubuntu/+source/xorg-server/+bug/1376903)).
 
 The second script is used to install Regolith DE and set his theme along with the i3xrocks bar.
 
