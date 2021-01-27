@@ -671,5 +671,5 @@ exec --no-startup-id $i3-wm.program.3
 #Launch Polybar
 #exec --no-startup-id $HOME/.config/polybar/launch.sh
 #Launch Caps Lock Fixer
-exec --no-startup-id  $HOME/capslockfixer-master/fixer.sh
+exec --no-startup-id $HOME/capslockfixer-master/fixer.sh
 
