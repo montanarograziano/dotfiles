@@ -18,9 +18,13 @@ echo ' Basic programs are installed!'
 
 #Install Microsoft Teams
 curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
-sudo apt update -y
-sudo apt install teams -y
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" | sudo tee /etc/apt/sources.list.d/teams.list
+sudo apt update
+sudo apt install -y teams
+#wget https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.3.00.5153_amd64.deb
+#sudo apt install -y ./teams_1.3.00.5153_amd64.deb
+#sudo rm ./teams_1.3.00.5153_amd64.deb
 echo 'Microsoft Teams is installed!'
 
 #Install Github Desktop
@@ -33,17 +37,17 @@ sudo apt install -y github-desktop
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 
 #Copying Wallpapers and Themes
-sudo cp -r /wallpapers /usr/share/backgrounds
-sudo cp -r /Yaru-Blue-Dark /usr/share/themes
-sudo cp -r /Yaru-Blue /usr/share/icons
+sudo cp -r ./wallpapers/* /usr/share/backgrounds
+sudo cp -r ./Yaru-Blue-dark/* /usr/share/themes
+sudo cp -r ./Yaru-Blue/* /usr/share/icons
 sudo cp .Xresources-regolith /home/graziano/.Xresources-regolith
-cd tela && sudo ./install.sh -b
-echo 'Themes and Backgrounds are installed!'
 gsettings set org.gnome.desktop.background picture-uri file:////usr/share/backgrounds/wallpaper2.jpeg
+cd tela && sudo ./install.sh -b
+echo 'Themes and Backgrounds are installed!' 
 echo 'Background has changed!'
-
+cd ..
 #Fixing CapsLock bug
-sudo mkdir home/graziano/capslockfixer-master
-sudo cp -r capslockfixer-master/* home/graziano/capslockfixer-master
+sudo mkdir /home/graziano/capslockfixer-master
+sudo cp -r ./capslockfixer-master/* /home/graziano/capslockfixer-master
 echo 'Caps Lock fixer has been add to Home directory. Make sure to add it to Startup Application.'
 
