@@ -1,5 +1,5 @@
-#define gtk_theme           Yaru-dark
-#define icon_theme          Yaru
+#define gtk_theme           Yaru-Blue-Dark
+#define icon_theme          Yaru-Blue
 #define desktop_wallpaper   /usr/share/backgrounds/wallpaper2.jpeg
 #define rofi_theme          /etc/regolith/styles/ubuntu/rofi.rasi
 #define theme_terminal_scrollbar never
