@@ -129,6 +129,7 @@ alias open="xdg-open"
 alias autoremove="sudo apt-get autoremove"
 alias cd..="cd .."
 alias github="cd Documenti/GitHub"
-
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
+alias updatefull="sudo apt update -y && sudo apt upgrade -y && sudo apt -y  autoremove"
 
 neofetch --disable gpu
