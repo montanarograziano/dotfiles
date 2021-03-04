@@ -17,14 +17,7 @@ sudo snap install spotify
 echo ' Basic programs are installed!'
 
 #Install Microsoft Teams
-curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" | sudo tee /etc/apt/sources.list.d/teams.list
-sudo apt update
-sudo apt install -y teams
-#wget https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.3.00.5153_amd64.deb
-#sudo apt install -y ./teams_1.3.00.5153_amd64.deb
-#sudo rm ./teams_1.3.00.5153_amd64.deb
+sudo dpkg -i teams*.deb
 echo 'Microsoft Teams is installed!'
 
 #Install Github Desktop
