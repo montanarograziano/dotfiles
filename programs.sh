@@ -8,8 +8,10 @@ sudo rm ./google-chrome-stable_current_amd64.deb
 echo ' Google Chrome is installed!'
 
 #Install useful programs
-sudo apt install -y vlc gnome-tweak-tool dconf-editor grub-customizer ubuntu-restricted-extras  ubuntu-restricted-addons libreoffice git vim neofetch obs-studio gnome-shell-extensions chrome-gnome-shell font-manager pavucontrol
+sudo apt install -y vlc gnome-tweak-tool dconf-editor grub-customizer ubuntu-restricted-extras  ubuntu-restricted-addons libreoffice git vim neofetch obs-studio gnome-shell-extensions chrome-gnome-shell font-manager pavucontrol htop gimp
 sudo apt install -y tlp tlp-rdw
+sudo add-apt-repository ppa:sicklylife/filezilla
+sudo apt update &&  sudo apt install filezilla
 sudo snap install telegram-desktop
 sudo snap install code --classic
 sudo snap install phpstorm --classic
@@ -33,14 +35,15 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 sudo cp -r ./wallpapers/* /usr/share/backgrounds
 sudo cp -r ./Yaru-Blue-dark/* /usr/share/themes
 sudo cp -r ./Yaru-Blue/* /usr/share/icons
-sudo cp .Xresources-regolith /home/graziano/.Xresources-regolith
+sudo cp .Xresources-regolith ~/.Xresources-regolith
 gsettings set org.gnome.desktop.background picture-uri file:////usr/share/backgrounds/wallpaper2.jpeg
 cd tela && sudo ./install.sh -b
 echo 'Themes and Backgrounds are installed!' 
 echo 'Background has changed!'
 cd ..
 #Fixing CapsLock bug
-sudo mkdir /home/graziano/capslockfixer-master
-sudo cp -r ./capslockfixer-master/* /home/graziano/capslockfixer-master
+sudo mkdir ~/capslockfixer-master
+sudo cp -r ./capslockfixer-master/* ~/capslockfixer-master
+sudo sh ~/capslockfixer-master/fixer.sh
 echo 'Caps Lock fixer has been add to Home directory. Make sure to add it to Startup Application.'
 
