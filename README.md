@@ -1,8 +1,8 @@
-# What it is
+# What is it?
 This repository contains dontfiles and theme settings I use on my machine.
 Distro is Ubuntu 20.04 with [Regolith](https://regolith-linux.org/) as DE.
 
-# What it contains
+# What does it contain?
 The main scripts are the following:
 - _programs.sh_
 - _regolith.sh_
@@ -13,5 +13,5 @@ Finally, a fix for a common _CAps LOck DElay BUg_ is made (See more [here](https
 
 The second script is used to install Regolith DE and set his theme along with the i3xrocks bar.
 
-# Why use it
+# Why use it?
 Running these scripts just shorten the amount of time I need to configure the system after a fresh install.
