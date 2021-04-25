@@ -88,9 +88,37 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ls='exa -al --color=always --group-directories-first' # my preferred listing
+alias la='exa -a --color=always --group-directories-first'  # all files and dirs
+alias ll='exa -l --color=always --group-directories-first'  # long format
+alias lt='exa -aT --color=always --group-directories-first' # tree listing
+alias l.='exa -a | egrep "^\."'
+
+# confirm before overwriting something
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+## get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+
+bind "set completion-ignore-case on"
+
+
+# git
+alias addup='git add -u'
+alias addall='git add .'
+alias branch='git branch'
+alias checkout='git checkout'
+alias clone='git clone'
+alias commit='git commit -m'
+alias fetch='git fetch'
+alias pull='git pull origin'
+alias push='git push origin'
+alias stat='git status'  # 'status' is protected name so using 'stat' instead
+alias tag='git tag'
+alias newtag='git tag -a'
+
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -123,7 +151,7 @@ alias sdn="sudo shutdown now"
 alias sr="sudo reboot"
 alias update="sudo apt update -y"
 alias upgrade="sudo apt upgrade -y"
-alias install="sudo apt-get install -y"
+alias install="sudo apt -y update && sudo apt-get -y install"
 alias remove="sudo apt-get remove"
 alias open="xdg-open"
 alias autoremove="sudo apt-get autoremove"
@@ -131,5 +159,5 @@ alias cd..="cd .."
 alias github="cd Documenti/GitHub"
 alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 alias updatefull="sudo apt update -y && sudo apt upgrade -y && sudo apt -y  autoremove"
-
+alias fixer="sh '/home/graziano/fixer.sh'"
 neofetch --disable gpu

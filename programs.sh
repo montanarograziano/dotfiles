@@ -12,10 +12,6 @@ sudo apt install -y vlc gnome-tweak-tool dconf-editor grub-customizer ubuntu-res
 sudo apt install -y tlp tlp-rdw
 sudo add-apt-repository ppa:sicklylife/filezilla
 sudo apt update &&  sudo apt install filezilla
-sudo snap install telegram-desktop
-sudo snap install code --classic
-sudo snap install phpstorm --classic
-sudo snap install spotify
 echo ' Basic programs are installed!'
 
 #Install Microsoft Teams
