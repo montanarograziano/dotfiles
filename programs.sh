@@ -14,32 +14,10 @@ sudo add-apt-repository ppa:sicklylife/filezilla
 sudo apt update &&  sudo apt install filezilla
 echo ' Basic programs are installed!'
 
-#Install Microsoft Teams
-sudo dpkg -i teams*.deb
-echo 'Microsoft Teams is installed!'
-
 #Install Github Desktop
 wget -qO - https://packagecloud.io/shiftkey/desktop/gpgkey | sudo apt-key add -
 sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/shiftkey/desktop/any/ any main" > /etc/apt/sources.list.d/packagecloud-shiftky-desktop.list'
 sudo apt update -y
 sudo apt install -y github-desktop
 
-#Add minimize on click
-gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
-
-#Copying Wallpapers and Themes
-sudo cp -r ./wallpapers/* /usr/share/backgrounds
-sudo cp -r ./Yaru-Blue-dark/* /usr/share/themes
-sudo cp -r ./Yaru-Blue/* /usr/share/icons
-sudo cp .Xresources-regolith ~/.Xresources-regolith
-gsettings set org.gnome.desktop.background picture-uri file:////usr/share/backgrounds/wallpaper2.jpeg
-cd tela && sudo ./install.sh -b
-echo 'Themes and Backgrounds are installed!' 
-echo 'Background has changed!'
-cd ..
-#Fixing CapsLock bug
-sudo mkdir ~/capslockfixer-master
-sudo cp -r ./capslockfixer-master/* ~/capslockfixer-master
-sudo sh ~/capslockfixer-master/fixer.sh
-echo 'Caps Lock fixer has been add to Home directory. Make sure to add it to Startup Application.'
 
