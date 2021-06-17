@@ -123,6 +123,23 @@ alias stat='git status'  # 'status' is protected name so using 'stat' instead
 alias tag='git tag'
 alias newtag='git tag -a'
 
+# Some aliases
+alias sa="sudo apt"
+alias s="sudo"
+alias sdn="sudo shutdown now"
+alias sr="sudo reboot"
+alias update="sudo apt update -y"
+alias upgrade="sudo apt upgrade -y"
+alias install="sudo apt -y update && sudo apt-get -y install"
+alias remove="sudo apt-get remove"
+alias open="xdg-open"
+alias autoremove="sudo apt -y autoremove"
+alias cd..="cd .."
+alias github="cd Documenti/GitHub"
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
+alias updatefull="sudo apt update -y && sudo apt upgrade -y && sudo apt -y  autoremove"
+alias fixer="sh '/home/graziano/fixer.sh'"
+alias drive="cd /home/graziano/Documenti/Google\ Drive\ \(1\)/"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -147,21 +164,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# Some aliases
-alias sa="sudo apt"
-alias s="sudo"
-alias sdn="sudo shutdown now"
-alias sr="sudo reboot"
-alias update="sudo apt update -y"
-alias upgrade="sudo apt upgrade -y"
-alias install="sudo apt -y update && sudo apt-get -y install"
-alias remove="sudo apt-get remove"
-alias open="xdg-open"
-alias autoremove="sudo apt-get autoremove"
-alias cd..="cd .."
-alias github="cd Documenti/GitHub"
-alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
-alias updatefull="sudo apt update -y && sudo apt upgrade -y && sudo apt -y  autoremove"
-alias fixer="sh '/home/graziano/fixer.sh'"
-neofetch --disable gpu
