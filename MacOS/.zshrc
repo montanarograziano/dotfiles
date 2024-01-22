@@ -30,6 +30,8 @@ setopt HIST_REDUCE_BLANKS
 bindkey ';5C' forward-word
 bindkey ';5D' backward-word 
 
+# Env variables
+export COOKIECUTTER_CONFIG=~/cookiecutter.yaml
 
 
 # trim space path like `Application Support/`
