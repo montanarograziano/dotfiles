@@ -19,4 +19,7 @@ ln -sfn "$PWD/.alias" "$HOME/.alias"
 # zsh
 ln -sfn "$PWD/.zshrc" "$HOME/.zshrc"
 
+# Cookiecutter
+cp -r "$PWD/cookiecutter/" "$HOME/.config/cookiecutter"
+
 echo "Finished :)"
