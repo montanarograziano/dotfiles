@@ -27,7 +27,7 @@ if [[ $? != 0 ]]; then
 	echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.zprofile"
 fi
 
-brew install docker git-delta wget gh nvim ripgrep libpq pipx zsh-syntax-highlighting zsh-autosuggestions
+brew install docker git-delta wget gh nvim ripgrep libpq pipx just zsh-syntax-highlighting zsh-autosuggestions
 brew tap homebrew/cask-fonts
 brew install --cask font-fira-code-nerd-font
 brew install --cask font-meslo-lg-nerd-font
