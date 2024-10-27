@@ -2,8 +2,12 @@
 
 This is a document that describes how things should be installed to setup a working machine.
 
-## Brew script
-The `brew.sh` script installs Homebrew, XCode Command Line tools, and bunch of tools with `brew` and `pipx`.
+## Install script
+The `install.sh` script calls the following scripts:
+
+- `macos.sh` -> Actives some OS configurations (tap to click, default screenshots folder, show hidden files etc.)
+- `brew.sh` -> Installs **Homebrew** and relevant packages
+- `tools.sh` -> Installs **Uv**, **Rust**
 
 Setup SSH keys for GitHub:
 

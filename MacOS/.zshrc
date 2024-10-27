@@ -28,7 +28,7 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS
 
 bindkey ';5C' forward-word
-bindkey ';5D' backward-word 
+bindkey ';5D' backward-word
 
 # Env variables
 export COOKIECUTTER_CONFIG=~/cookiecutter.yaml
@@ -38,3 +38,6 @@ export COOKIECUTTER_CONFIG=~/cookiecutter.yaml
 export PATH=$(echo $PATH | sed 's/\ /\\ /g')
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="~/.local/bin:$PATH"
+
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

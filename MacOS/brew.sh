@@ -27,7 +27,7 @@ if [[ $? != 0 ]]; then
 	echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.zprofile"
 fi
 
-brew install docker git-delta wget gh nvim ripgrep libpq pipx just zsh-syntax-highlighting zsh-autosuggestions
+brew install docker git-delta wget gh nvim ripgrep libpq just zsh-syntax-highlighting zsh-autosuggestions
 brew tap homebrew/cask-fonts
 brew install --cask font-fira-code-nerd-font
 brew install --cask font-meslo-lg-nerd-font
@@ -45,39 +45,6 @@ brew install --cask spotify
 
 brew cleanup
 
-# Install Python and Uv
-print "Install uv (https://github.com/astral-sh/uv#uv)"
-
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-versions=(
-    "3.12"
-    "3.11"
-    "3.10"
-    "3.9"
-)
-
-safe_version="${versions[1]}"
-
-for version in "${versions[@]}"; do
-    uv python install -- "$version"
-done
-
-libs=(
-    "argcomplete"
-    "asitop"
-    "commitizen"
-    "cookiecutter"
-    "huggingface-hub[cli]"
-    "jupytext"
-    "mypy"
-    "posting"
-    "pytest"
-    "ruff"
-)
-
-for lib in "${libs[@]}"; do
-	uv tool install --upgrade --python="$safe_version" -- "$lib"
-done
-
-uv tool install --upgrade --python="$safe_version" --with pre-commit-uv -- pre-commit
+# set XDG directories
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
