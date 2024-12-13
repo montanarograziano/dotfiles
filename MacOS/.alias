@@ -1,15 +1,13 @@
 # Aliases for Advent of Code
 alias aoc='python code.py input.txt'
-alias aot='python code.py test.txt'
+alias aot='python code.py example.txt'
 
 # Git and replace ls with exa
-
-alias ls='exa --color=always'
-alias la='exa -a --color=always --group-directories-first'
-alias ll='exa -l --color=always --group-directories-first'
-alias lt='exa -aT --color=always --group-directories-first'
+alias ls='eza --color=always'
+alias la='eza -a --color=always --group-directories-first'  # all files and dirs
+alias ll='eza -l --color=always --group-directories-first'  # long format
+alias lt='eza -aT --color=always --group-directories-first' # tree listing
 alias cd..="cd .."
-alias github="cd ~/Documents/GitHub"
+alias github="cd /Users/graziano/Documents/GitHub"
 alias gs="git status"
-alias dotfiles="cd ~/Documents/GitHub/dotfiles"
 

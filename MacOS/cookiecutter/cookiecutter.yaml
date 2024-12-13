@@ -1,6 +1,6 @@
 # see https://cookiecutter.readthedocs.io/en/2.0.2/advanced/user_config.html
 default_context:
-  author_name: "Graziano Montanaro" # works for slidev too
+  author_name: "Graziano Montanaro"
   author_email: "40232320+montanarograziano@users.noreply.github.com"
   author_github_handle: "montanarograziano"
   author_job_title: "ML Engineer"
@@ -12,4 +12,4 @@ abbreviations:
   # personal cookiecutters
   me: https://github.com/montanarograziano/{0}
   chef: https://github.com/baggiponte/chef
-  uv: https://github.com/montanarograziano/cookiecutter-uv
+  uv: https://github.com/fpgmaas/cookiecutter-uv
