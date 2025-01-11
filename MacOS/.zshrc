@@ -43,6 +43,7 @@ export PATH="~/.local/bin:$PATH"
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
 eval "$(rbenv init - zsh)"
 eval "$(uv generate-shell-completion zsh)"
+eval "$(starship init zsh)"
 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

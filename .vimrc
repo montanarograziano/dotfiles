@@ -23,7 +23,6 @@ call plug#end()
 
 syntax on
 set number
-colorscheme onedark
 
 " Reasonable indentations
 set expandtab tabstop=4 shiftwidth=4 softtabstop=4

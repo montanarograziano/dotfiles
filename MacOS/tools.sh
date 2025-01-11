@@ -52,12 +52,10 @@ done
 
 libs=(
     "argcomplete"
+    "jupytext"
     "commitizen"
     "cookiecutter"
-    "huggingface-hub[cli]"
-    "jupytext"
     "mypy"
-    "posting"
     "pytest"
     "ruff"
     "ipykernel"
