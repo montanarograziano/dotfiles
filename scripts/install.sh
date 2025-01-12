@@ -4,11 +4,24 @@
 # error on undefined variables, and fail on pipe errors.
 set -euo pipefail
 
+# Function to safely run scripts
+run_script() {
+    local script_path="$1"
+
+    if [[ -f "$script_path" ]]; then
+        echo "Running $script_path..."
+        "$script_path"
+        echo "✔︎ Successfully executed $script_path."
+    else
+        echo "⚠️ Error: Script '$script_path' not found. Skipping."
+    fi
+}
+
 echo "Setting macOS defaults..."
-$XDG_CONFIG_HOME/scripts/macos.sh
+run_script "$XDG_CONFIG_HOME/scripts/macos.sh"
 
 # Run Homebrew script, needed to install git first
-$XDG_CONFIG_HOME/scripts/brew.sh
+run_script "$XDG_CONFIG_HOME/scripts/brew.sh"
 
 # Variables
 FILES_TO_LINK=(".alias" ".zshrc" ".gitconfig")
@@ -36,6 +49,6 @@ else
 fi
 
 echo "Installing desired tools (Uv, python, rust)..."
-$XDG_CONFIG_HOME/scripts/tools.sh
+run_script "$XDG_CONFIG_HOME/scripts/tools.sh"
 
 echo "✔︎ Finished setup!"
