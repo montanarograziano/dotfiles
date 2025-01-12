@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-
+set -euo pipefail
 # Set the desired ZDOTDIR configuration
 ZDOTDIR_LINE='export ZDOTDIR="$HOME/.config/zsh"'
 ZSHENV_FILE="/etc/zshenv"
