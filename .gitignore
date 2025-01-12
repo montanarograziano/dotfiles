@@ -1,1 +1,14 @@
 .DS_Store
+# unix sockets
+*.sock
+# github
+gh
+github-copilot
+
+*.bak
+
+ipython
+jupyter
+.vscode
+.vscode-server
+.vscode-test
