@@ -5,10 +5,10 @@
 set -euo pipefail
 
 echo "Setting macOS defaults..."
-$XDG_DATA_HOME/scripts/macos.sh
+$XDG_CONFIG_HOME/scripts/macos.sh
 
 # Run Homebrew script, needed to install git first
-$XDG_DATA_HOME/scripts/brew.sh
+$XDG_CONFIG_HOME/scripts/brew.sh
 
 # Variables
 FILES_TO_LINK=(".alias" ".zshrc" ".gitconfig")
@@ -36,6 +36,6 @@ else
 fi
 
 echo "Installing desired tools (Uv, python, rust)..."
-$XDG_DATA_HOME/scripts/tools.sh
+$XDG_CONFIG_HOME/scripts/tools.sh
 
 echo "✔︎ Finished setup!"
