@@ -41,8 +41,6 @@ done
 
 # Define libraries to install
 python_libraries=(
-    "argcomplete"
-    "jupytext"
     "commitizen"
     "cookiecutter"
     "mypy"

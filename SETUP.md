@@ -5,9 +5,9 @@ This is a document that describes how things should be installed to setup a work
 ## Install script
 The `install.sh` script calls the following scripts:
 
-- `macos.sh` -> Actives some OS configurations (tap to click, default screenshots folder, show hidden files etc.)
-- `brew.sh` -> Installs **Homebrew** and relevant packages
-- `tools.sh` -> Installs **Uv**, **Rust**
+- `settings.sh` -> Actives some OS configurations (tap to click, default screenshots folder, show hidden files etc.)
+- `brew.sh` -> Installs **XCode Command Line tools**,  **Homebrew** and relevant packages
+- `tools.sh` -> Installs **Uv**, python versions from **3.9** to **3.12** and some tools like **mypy**, **pytest**, **pre-commit**, and also installs **Rust**.
 
 Setup SSH keys for GitHub:
 
