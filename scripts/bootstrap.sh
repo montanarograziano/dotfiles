@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # Exit on error
 set -e
@@ -52,24 +52,32 @@ if [[ ! -d "$TARGET_DIR" ]]; then
     git clone "$DOTFILES_REPO" "$TARGET_DIR"
     echo "✔︎ Repository cloned successfully!"
 else
-    read -r -p "⚠️ Repository already exists at '$TARGET_DIR'. Replace dotfiles? (Contents of '$TARGET_DIR' will not be deleted) [y/N]: " response
+    read -r "response?⚠️ Repository already exists at '$TARGET_DIR'. Replace dotfiles? (Contents of '$TARGET_DIR' will not be deleted) [y/N]: "
     if [[ "$response" =~ ^(y|yes|Y)$ ]]; then
-    # Backup existing config directory
-    if [[ -d "$BACKUP_DIR" ]]; then
-      echo "⚠️ Backup directory '$BACKUP_DIR' already exists. Removing it first..."
-      rm -rf "$BACKUP_DIR"
+        # Backup existing config directory
+        if [[ -d "$BACKUP_DIR" ]]; then
+            echo "⚠️ Backup directory '$BACKUP_DIR' already exists. Removing it first..."
+            rm -rf "$BACKUP_DIR"
+        fi
+        mv "$TARGET_DIR" "$BACKUP_DIR"
+        echo "✔︎ Moved old configs to '$BACKUP_DIR'."
+
+        # Clone the repository
+        echo "Cloning dotfiles repository into '$TARGET_DIR'..."
+        git clone "$DOTFILES_REPO" "$TARGET_DIR"
+        echo "✔︎ Repository cloned successfully!"
+    else
+        echo "⚠️ Skipped cloning dotfiles. Ensure all dependencies are manually installed."
     fi
-    mv "$CONFIG_DIR" "$BACKUP_DIR"
-    echo "✔︎ Moved old configs to '$BACKUP_DIR'."
-    # Clone the repository
-    echo "Cloning dotfiles repository into '$TARGET_DIR'..."
-    git clone "$DOTFILES_REPO" "$TARGET_DIR"
-  else
-    echo "⚠️ Skipped cloning dotfiles. Ensure all dependencies are manually installed."
 fi
 
-# Run the main installation script
-echo "Running the main installation script..."
-$TARGET_DIR/scripts/install.sh
+# Check if TARGET_DIR exists
+if [[ -d "$TARGET_DIR" ]]; then
+    echo "Running the main installation script..."
+    $TARGET_DIR/scripts/install.sh
+else
+    echo "⚠️ Error: Target directory '$TARGET_DIR' does not exist. Please ensure the repository is cloned correctly."
+    exit 1
+fi
 
 echo "✔︎ Bootstrap process completed!"
