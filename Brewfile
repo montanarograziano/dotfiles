@@ -6,7 +6,6 @@ brew "htop"
 brew "btop"
 brew "curl"
 brew "eza"
-brew "docker"
 # Docker CLI plugin for extended build capabilities with BuildKit
 brew "docker-buildx"
 # Isolated development environments using Docker
@@ -36,6 +35,7 @@ cask "appcleaner"
 cask "discord"
 cask "spotify"
 cask "whatsapp"
+cask "telegram"
 # Fonts
 cask "font-fira-code-nerd-font"
 cask "font-meslo-lg-nerd-font"
@@ -45,6 +45,8 @@ cask "font-jetbrains-mono"
 cask "ghostty"
 # git credential manager
 cask "git-credential-manager"
+# Git GUI
+cask "github"
 # JetBrains tools manager
 cask "jetbrains-toolbox"
 # Clipboard manager
@@ -57,3 +59,7 @@ cask "obs"
 cask "ollama"
 # IDE
 cask "visual-studio-code"
+# Password manager
+cask "1password"
+# Docker Desktop
+cask "docker"
