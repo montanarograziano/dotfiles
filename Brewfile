@@ -1,6 +1,34 @@
 tap "homebrew/bundle"
 tap "homebrew/services"
-brew tap homebrew/cask-fonts
+tap "homebrew/cask-fonts"
+
+brew "htop"
+brew "btop"
+brew "curl"
+brew "eza"
+brew "docker"
+# Docker CLI plugin for extended build capabilities with BuildKit
+brew "docker-buildx"
+# Isolated development environments using Docker
+brew "docker-compose"
+# Platform keystore credential helper for Docker
+brew "docker-credential-helper"
+brew "gh"
+# Distributed revision control system
+brew "git"
+brew "git-delta"
+# Git extension for versioning large files
+brew "git-lfs"
+# Better Makefile in Rust
+brew "just"
+# Modern and fast prompt
+brew "starship"
+# wget
+brew "wget"
+# JS runtime builder
+brew "oven-sh/bun/bun"
+
+
 
 # Application uninstaller
 cask "appcleaner"
