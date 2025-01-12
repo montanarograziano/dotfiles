@@ -70,7 +70,6 @@ fi
 
 # Run the main installation script
 echo "Running the main installation script..."
-cd "$TARGET_DIR" || exit
-./scripts/install.sh
+$TARGET_DIR/scripts/install.sh
 
 echo "✔︎ Bootstrap process completed!"
