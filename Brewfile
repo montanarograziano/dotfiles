@@ -28,4 +28,4 @@ cask "obs"
 # Serve LLM locally
 cask "ollama"
 # IDE
-cas "visual-studio-code"
+cask "visual-studio-code"
