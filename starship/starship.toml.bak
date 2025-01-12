@@ -1,35 +1,60 @@
-"$schema" = 'https://starship.rs/config-schema.json'
-add_newline = true
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$nix_shell\
+$python\
+$rust\
+$docker_context\
+$kubernetes\
+$helm\
+$line_break\
+$character"""
 
-[aws]
-disabled = true
+[directory]
+truncation_length = 0
+truncate_to_repo = false
+style = "blue"
 
-[battery]
-full_symbol = "• "
-charging_symbol = "⇡ "
-discharging_symbol = "⇣ "
-unknown_symbol = "❓ "
-empty_symbol = "❗ "
-disabled = true
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](purple)"
 
-[erlang]
-symbol = "ⓔ "
+[git_branch]
+format = "[$branch]($style)"
+style = "bright-black"
 
-[nodejs]
-symbol = "[⬢](bold green) "
+[git_status]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style) "
+style = "cyan"
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
 
-[pulumi]
-symbol = "🧊 "
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
 
-[typst]
-symbol = "t "
+[kubernetes]
+disabled = false
+symbol = "🛟 "
+format = '⋅ [$symbol$context( \($namespace\))]($style) '
 
-# https://starship.rs/config/#package-version
-[package]
-disabled = true
+[python]
+format = '⋅ [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "yellow"
 
-# # https://starship.rs/config/#character
-# Replace the '❯' symbol in the prompt with '➜'
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
-error_symbol = "[❯](bold red)"
+[rust]
+format = '⋅ [$symbol($version )]($style)'
+
+[cmd_duration]
+format = "[$duration]($style) "
+style = "yellow"

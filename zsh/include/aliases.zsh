@@ -10,3 +10,4 @@ alias lt='eza -aT --color=always --group-directories-first' # tree listing
 alias cd..="cd .."
 alias github="cd /Users/graziano/Documents/GitHub"
 alias gs="git status"
+alias dotfiles="cd ~/.config"

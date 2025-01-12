@@ -19,3 +19,7 @@ if command -v starship >/dev/null; then
 	export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 	eval "$(starship init zsh)"
 fi
+
+
+autoload -Uz compinit && compinit -d "${XDG_CACHE_HOME}/zsh/zcompdump"
+autoload -Uz bashcompinit && bashcompinit

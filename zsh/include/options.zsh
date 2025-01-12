@@ -37,3 +37,9 @@ setopt HIST_REDUCE_BLANKS
 
 bindkey ';5C' forward-word
 bindkey ';5D' backward-word
+
+
+zmodload zsh/complist
+
+# colors for print
+autoload -Uz colors && colors

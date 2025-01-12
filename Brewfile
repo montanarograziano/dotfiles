@@ -63,3 +63,19 @@ cask "visual-studio-code"
 cask "1password"
 # Docker Desktop
 cask "docker"
+# DisplayLink Manager
+cask "displaylink"
+# Onedrive
+cask "onedrive"
+# Logi Options +
+cask "logi-options"
+# Chrome
+cask "google-chrome"
+# Firefox
+cask "firefox"
+# Acrobat Reader
+cask "adobe-acrobat-reader"
+# vlc
+cask "vlc"
+# Twingate (vpn manager)
+cask "twingate"
