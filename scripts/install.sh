@@ -18,7 +18,7 @@ run_script() {
 }
 
 echo "Setting macOS defaults..."
-run_script "$XDG_CONFIG_HOME/scripts/macos.sh"
+run_script "$XDG_CONFIG_HOME/scripts/settings.sh"
 
 # Run Homebrew script, needed to install git first
 run_script "$XDG_CONFIG_HOME/scripts/brew.sh"

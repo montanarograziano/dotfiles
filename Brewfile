@@ -1,6 +1,6 @@
 tap "homebrew/bundle"
 tap "homebrew/services"
-tap "homebrew/cask-fonts"
+tap "oven-sh/bun"
 
 brew "htop"
 brew "btop"
