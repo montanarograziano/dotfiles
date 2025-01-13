@@ -8,7 +8,8 @@ alias la='eza -a --color=always --group-directories-first'  # all files and dirs
 alias ll='eza -l --color=always --group-directories-first'  # long format
 alias lt='eza -aT --color=always --group-directories-first' # tree listing
 alias cd..="cd .."
-alias github="cd /Users/graziano/Documents/GitHub"
+alias github="cd /Users/graziano/GitHub"
 alias gs="git status"
 alias dotfiles="cd ~/.config"
 alias szdot="source $ZDOTDIR/.zshrc"
+alias zdot="vim $ZDOTDIR/.zshrc"
