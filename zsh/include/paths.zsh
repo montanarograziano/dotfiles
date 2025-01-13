@@ -19,6 +19,9 @@ export PATH=$(echo $PATH | sed 's/\ /\\ /g')
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="~/.local/bin:$PATH"
 
+# Ghostty Fix for ssh sessions
+export TERM="xterm-256color"
+
 
 if [[ -f "${XDG_DATA_HOME}/cargo/bin/rustup" ]]; then
 	export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"

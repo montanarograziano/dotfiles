@@ -12,3 +12,4 @@ jupyter
 .vscode
 .vscode-server
 .vscode-test
+.zsh_sessions
