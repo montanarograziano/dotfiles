@@ -5,7 +5,7 @@ Note that it's based on MacOS and therefore it would not work on other OS.
 
 ## How to use the dotfiles
 
-The `bootstrap.sh` scripts inside `scripts` folder is the source of everything: it installs Homebrew and git, and clone this repository that other tools can be installed. To use this script, you either donwload and run manually or run the following commands:
+The `bootstrap.sh` scripts inside `scripts` folder is the source of everything: it installs Homebrew and git, and clone this repository so that other tools can be installed. To use this script, you either donwload and run manually or run the following commands:
 
 ```sh
 curl -O https://raw.githubusercontent.com/montanarograziano/dotfiles/main/scripts/bootstrap.sh
@@ -17,7 +17,7 @@ The script will attempt at:
 - Install XCode Command Line Tools
 - Install Homebrew
 - Install git through Homebrew
-- Clone this repository, eventually move in `.config.bak/` and existing one before overwriting it
+- Clone this repository, eventually move in `.config.bak/` an existing one before overwriting it
 - Run `install.sh` script
 
 
