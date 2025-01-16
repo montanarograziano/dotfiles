@@ -8,7 +8,7 @@ set -euo pipefail
 
 echo "running macos defaults..."
 # macos
-./macos.sh
+./scripts/macos.sh
 
 DOTFILES_REPO="https://github.com/montanarograziano/dotfiles"
 CONFIG_DIR="$HOME/.config"
@@ -41,7 +41,7 @@ fi
 
 ln -s "$HOME/.config/.gitconfig" "$HOME/.gitconfig"
 
-./brew.sh
+./scripts/brew.sh
 
 # alias
 ln -sfn "$PWD/.alias" "$HOME/.alias"

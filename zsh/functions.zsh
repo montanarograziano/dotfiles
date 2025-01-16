@@ -1,4 +1,3 @@
-# Load .env file if it exists in the current directory
 autoload -U add-zsh-hook
 
 load_dotenv() {
@@ -10,12 +9,6 @@ load_dotenv() {
     set +a  # Stop automatically exporting variables
   fi
 }
-
 # Hook into the 'chpwd' event to load .env whenever you change directories
 add-zsh-hook chpwd load_dotenv
 load_dotenv
-
-# Load the pure prompt  
-autoload -U promptinit; promptinit
-prompt pure
-autoload -U compinit && compinit
