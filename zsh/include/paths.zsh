@@ -1,5 +1,6 @@
 paths=(
     "${HOME}/.local/bin"
+    "$HOME/.local/share/../bin/env"
     "${XDG_DATA_HOME}/bob/nvim-bin"
     "${XDG_DATA_HOME}/jetbrains/bin"
     "/usr/bin"
@@ -18,7 +19,6 @@ export COOKIECUTTER_CONFIG="${XDG_CONFIG_HOME}/cookiecutter/cookiecutter.yaml"
 export PATH=$(echo $PATH | sed 's/\ /\\ /g')
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="~/.local/bin:$PATH"
-
 # Ghostty Fix for ssh sessions
 export TERM="xterm-256color"
 
