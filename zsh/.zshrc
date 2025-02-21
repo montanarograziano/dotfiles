@@ -14,3 +14,4 @@ done
 # Find a better place to insert these?
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+. "$HOME/.local/share/../bin/env"
