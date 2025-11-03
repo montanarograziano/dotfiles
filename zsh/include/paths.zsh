@@ -15,6 +15,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Env variables
 export COOKIECUTTER_CONFIG="${XDG_CONFIG_HOME}/cookiecutter/cookiecutter.yaml"
+export JAVA_HOME="/opt/homebrew/Cellar/openjdk@17/17.0.15/libexec/openjdk.jdk/Contents/Home"
 # trim space path like `Application Support/`
 export PATH=$(echo $PATH | sed 's/\ /\\ /g')
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
