@@ -8,6 +8,8 @@ fpath=(${COMPDIR} $fpath) # won't work if there are quotes
 command -v uv >/dev/null && uv generate-shell-completion zsh > "${COMPDIR}/_uv"
 command -v uvx >/dev/null && uvx --generate-shell-completion=zsh > "${COMPDIR}/_uvx"
 command -v ruff >/dev/null && ruff generate-shell-completion zsh > "${COMPDIR}/_ruff"
+command -v prek >/dev/null && COMPLETE=zsh prek completion > "${COMPDIR}/_prek"
+
 
 command -v cz >/dev/null && register-python-argcomplete cz > "${COMPDIR}/_cz"
 
