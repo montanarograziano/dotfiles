@@ -45,41 +45,67 @@ exec zsh -l
 
 ## Git identity and SSH keys
 
-Git identity is **not** stored in the tracked `.gitconfig`. The tracked file holds only generic settings plus an `[include]` of an untracked, gitignored local file, so personal/work details are never committed.
+Two separate concerns, kept separate:
+- **Identity** (commit author name/email) is chosen by git, per repo location.
+- **Authentication** (which SSH key) is chosen by `~/.ssh/config`, per host.
 
-How identity (and the SSH key) is selected per repo:
-- `~/.config/git/local.gitconfig` sets the **default** identity. On a work machine this is your work account. It also sets the SSH key via `core.sshCommand`.
-- An `includeIf "gitdir:~/.config/"` rule makes the **dotfiles repo itself** commit and authenticate with your **personal** account from `~/.config/git/personal.gitconfig`.
+### Identity (git)
+
+Identity is **not** stored in the tracked `.gitconfig`. The tracked file holds only generic settings plus an `[include]` of an untracked, gitignored local file, so personal/work details are never committed.
+
+- `~/.config/git/local.gitconfig` sets the **default** identity. On a work machine this is your work account.
+- An `includeIf "gitdir:~/.config/"` rule makes the **dotfiles repo itself** commit with your **personal** account from `~/.config/git/personal.gitconfig`.
 - Add more `includeIf` rules (e.g. `gitdir:~/personal/`) for personal projects kept elsewhere.
 
-Do **not** use `git config --global user.name/email`: with `~/.gitconfig` symlinked to the tracked repo file, those writes land in version control. Edit the local files (below) instead.
-
-`install.sh` seeds both local files from their `.example` templates on first run. Then fill them in:
+Do **not** use `git config --global user.name/email`: with `~/.gitconfig` symlinked to the tracked repo file, those writes land in version control. Edit the local files instead. `install.sh` seeds them from the `.example` templates on first run:
 
 ```sh
-vim ~/.config/git/local.gitconfig      # work identity + work SSH key path
-vim ~/.config/git/personal.gitconfig   # personal identity (used for the dotfiles repo)
+vim ~/.config/git/local.gitconfig      # work identity (default)
+vim ~/.config/git/personal.gitconfig   # personal identity (dotfiles repo)
 ```
 
-Generate one SSH key per account (the paths must match `core.sshCommand` in the files above):
+### Authentication (SSH keys)
+
+Map each git host to the right key in `~/.ssh/config`. These files set no SSH key themselves, so keys never get tangled with identity, and different hosts can use different keys.
+
+```sshconfig
+# Personal GitHub
+Host github.com
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/personal
+	IdentitiesOnly yes
+
+# Work GitHub: same hostname as personal, so it needs an ALIAS.
+# Clone work repos as: git@work-github:org/repo.git
+Host work-github
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/work
+	IdentitiesOnly yes
+
+# Work GitLab: a distinct hostname, so normal URLs work.
+Host gitlab.company.tech
+	HostName gitlab.company.tech
+	User git
+	IdentityFile ~/.ssh/work
+	IdentitiesOnly yes
+```
+
+Generate a key per account and register each PUBLIC half on the matching server:
 
 ```sh
-ssh-keygen -t ed25519 -f ~/.ssh/work     -C "you@company.com"        # work
-ssh-keygen -t ed25519 -f ~/.ssh/personal -C "you@personal.example"   # personal
-
+ssh-keygen -t ed25519 -f ~/.ssh/personal -C "you@personal.example"
+ssh-keygen -t ed25519 -f ~/.ssh/work     -C "you@company.com"
 eval "$(ssh-agent -s)"
-ssh-add --apple-use-keychain ~/.ssh/work ~/.ssh/personal
-
-# Add each PUBLIC key to the matching GitHub account (Settings > SSH and GPG keys)
-pbcopy < ~/.ssh/work.pub     && open "https://github.com/settings/ssh"   # work account
-pbcopy < ~/.ssh/personal.pub && open "https://github.com/settings/ssh"   # personal account
-
-ssh -T git@github.com   # verify
+ssh-add --apple-use-keychain ~/.ssh/personal ~/.ssh/work
+pbcopy < ~/.ssh/personal.pub   # paste into the matching SSH key settings
+ssh -T git@github.com          # verify
 ```
 
-Because the key is chosen by `core.sshCommand` based on repo location, you clone with normal `git@github.com:org/repo.git` URLs, no host aliases needed.
+Two GitHub accounts share one hostname (`github.com`), so the work one needs a Host **alias** and you clone it as `git@work-github:org/repo.git`. A distinct host (your GitLab server) matches by hostname directly, so normal `git@host:org/repo.git` URLs just work.
 
-To push **this dotfiles repo** with your personal key, switch its remote from HTTPS to SSH:
+To push **this dotfiles repo** with your personal key, set its remote to SSH:
 
 ```sh
 git -C ~/.config remote set-url origin git@github.com:montanarograziano/dotfiles.git
