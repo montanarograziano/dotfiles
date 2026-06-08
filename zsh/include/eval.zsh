@@ -11,7 +11,7 @@ command -v ruff >/dev/null && ruff generate-shell-completion zsh > "${COMPDIR}/_
 command -v prek >/dev/null && COMPLETE=zsh prek completion > "${COMPDIR}/_prek"
 
 
-command -v cz >/dev/null && register-python-argcomplete cz > "${COMPDIR}/_cz"
+command -v register-python-argcomplete >/dev/null && command -v cz >/dev/null && register-python-argcomplete cz > "${COMPDIR}/_cz"
 
 # rust
 command -v rustup >/dev/null && rustup completions zsh > "${COMPDIR}/_rustup"

@@ -1,0 +1,12 @@
+# Personal git identity. Applied to repos under ~/.config (your dotfiles) via
+# the includeIf rule in local.gitconfig. Copy to ~/.config/git/personal.gitconfig
+# (install.sh does this) and fill in your details. Gitignored: never committed.
+[user]
+	name = your-personal-name
+	email = you@personal.example
+[github]
+	user = your-github-handle
+[core]
+	# Personal SSH key. Generate with:
+	#   ssh-keygen -t ed25519 -f ~/.ssh/personal -C "you@personal.example"
+	sshCommand = ssh -i ~/.ssh/personal -o IdentitiesOnly=yes

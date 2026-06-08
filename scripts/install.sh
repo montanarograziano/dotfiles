@@ -1,8 +1,12 @@
 #!/usr/bin/env zsh
 
-# Exit immediately if a command exits with a non-zero status,
-# error on undefined variables, and fail on pipe errors.
+# Exit immediately on error, error on undefined variables, and fail on pipe errors.
 set -euo pipefail
+
+# Resolve paths from this script's own location so it works regardless of $PWD
+# and without relying on env vars that the shell config has not loaded yet.
+SCRIPT_DIR="${0:A:h}"      # absolute dir of this script (symlinks resolved)
+REPO_DIR="${SCRIPT_DIR:h}" # repo root (parent of scripts/), normally ~/.config
 
 # Function to safely run scripts
 run_script() {
@@ -18,37 +22,38 @@ run_script() {
 }
 
 echo "Setting macOS defaults..."
-run_script "$XDG_CONFIG_HOME/scripts/settings.sh"
+run_script "$SCRIPT_DIR/settings.sh"
 
-# Run Homebrew script, needed to install git first
-run_script "$XDG_CONFIG_HOME/scripts/brew.sh"
+# Install Homebrew packages (Brewfile)
+run_script "$SCRIPT_DIR/brew.sh"
 
-# Variables
-FILES_TO_LINK=(".alias" ".zshrc" ".gitconfig")
-COOKIECUTTER_SOURCE="./cookiecutter/"
-COOKIECUTTER_DEST="$CONFIG_DIR/cookiecutter"
-
-# Create symbolic links for specified files
-echo "Creating symbolic links..."
-for file in "${FILES_TO_LINK[@]}"; do
-  if [[ -f "$PWD/$file" ]]; then
-    ln -sfn "$PWD/$file" "$HOME/$file"
-    echo "✔︎ Linked '$file' to '$HOME/$file'."
-  else
-    echo "⚠️ File '$PWD/$file' not found. Skipping..."
-  fi
-done
-
-# Ensure Cookiecutter directory exists and copy files
-if [[ -d "$COOKIECUTTER_SOURCE" ]]; then
-  mkdir -p "$COOKIECUTTER_DEST"
-  cp -r "$COOKIECUTTER_SOURCE"/* "$COOKIECUTTER_DEST"
-  echo "✔︎ Copied Cookiecutter templates to '$COOKIECUTTER_DEST'."
+# Symlink .gitconfig into $HOME. The zsh config is loaded via ZDOTDIR
+# (set in tools.sh), so .zshrc needs no symlink.
+GITCONFIG_SRC="$REPO_DIR/.gitconfig"
+GITCONFIG_DST="$HOME/.gitconfig"
+if [[ -f "$GITCONFIG_SRC" ]]; then
+    if [[ -e "$GITCONFIG_DST" && ! -L "$GITCONFIG_DST" ]]; then
+        mv "$GITCONFIG_DST" "$GITCONFIG_DST.bak"
+        echo "✔︎ Backed up existing .gitconfig to '$GITCONFIG_DST.bak'."
+    fi
+    ln -sfn "$GITCONFIG_SRC" "$GITCONFIG_DST"
+    echo "✔︎ Linked .gitconfig to '$GITCONFIG_DST'."
 else
-  echo "⚠️ Cookiecutter source directory '$COOKIECUTTER_SOURCE' not found. Skipping..."
+    echo "⚠️ '$GITCONFIG_SRC' not found. Skipping .gitconfig link."
 fi
 
-echo "Installing desired tools (Uv, python, rust)..."
-run_script "$XDG_CONFIG_HOME/scripts/tools.sh"
+# Seed untracked local git config files from their templates if missing.
+# Tracked: git/*.example. Local (gitignored): the same names without .example.
+echo "Seeding local git config from templates..."
+for example in "$REPO_DIR"/git/*.example(N); do
+    target="${example%.example}"
+    if [[ ! -f "$target" ]]; then
+        cp "$example" "$target"
+        echo "✔︎ Created '$target' (edit it with your details)."
+    fi
+done
 
-echo "✔︎ Finished setup!"
+echo "Installing dev tools (uv, Python, Rust) and configuring ZDOTDIR..."
+run_script "$SCRIPT_DIR/tools.sh"
+
+echo "✔︎ Finished setup! Open a new terminal, or run: exec zsh -l"

@@ -43,7 +43,8 @@ else
 fi
 
 # Clone your repository
-DOTFILES_REPO="https://github.com/montanarograziano/dotfiles"
+# Override by exporting DOTFILES_REPO before running (e.g. when using a fork).
+DOTFILES_REPO="${DOTFILES_REPO:-https://github.com/montanarograziano/dotfiles}"
 TARGET_DIR="$HOME/.config"
 BACKUP_DIR="$HOME/.config.bak"
 

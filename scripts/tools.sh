@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 set -euo pipefail
+
+# Default XDG dirs so a standalone run (before the zsh config is loaded)
+# doesn't trip `set -u` further down (e.g. the Rust setup below).
+: "${XDG_DATA_HOME:=$HOME/.local/share}"
+
 # Set the desired ZDOTDIR configuration
 ZDOTDIR_LINE='export ZDOTDIR="$HOME/.config/zsh"'
 ZSHENV_FILE="/etc/zshenv"
@@ -28,6 +33,10 @@ else
     echo "✔︎ uv is already installed."
 fi
 
+# uv installs to ~/.local/bin, which isn't on PATH yet during a fresh run.
+# Add it so the Python steps below can find uv.
+export PATH="$HOME/.local/bin:$PATH"
+
 # Define Python versions to install
 PYTHON_VERSIONS=(
     "3.12"
@@ -46,14 +55,15 @@ for version in "${PYTHON_VERSIONS[@]}"; do
     fi
 done
 
-# Define Python libraries to install
+# Define Python CLI tools to install globally with `uv tool`.
+# Only packages that expose executables belong here. Libraries like ipykernel
+# provide no entrypoint and must be added per-project (e.g. `uv add ipykernel`).
 PYTHON_LIBRARIES=(
     "commitizen"
     "cookiecutter"
     "mypy"
     "pytest"
     "ruff"
-    "ipykernel"
     "pre-commit"
 )
 
@@ -77,13 +87,17 @@ export CARGO_HOME="$XDG_DATA_HOME/cargo"
 echo "Checking for Rust installation..."
 if ! command -v rustup &>/dev/null; then
     echo "Installing Rust..."
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    # --no-modify-path: don't let rustup append a hardcoded cargo-env line to
+    # shell startup files; zsh/.zshenv already sources it generically.
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
     echo "✔︎ Rust installed successfully."
 else
     echo "✔︎ Rust is already installed."
 fi
 
-# Uncomment the lines below to include Rust stable version and rust-analyzer setup
+# rustup/cargo install into $CARGO_HOME/bin, which isn't on PATH yet in this run.
+export PATH="$CARGO_HOME/bin:$PATH"
+
 echo "Setting up Rust stable version and rust-analyzer..."
 rustup install stable
 rustup component add rust-analyzer --toolchain=stable

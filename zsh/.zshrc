@@ -11,7 +11,9 @@ for s in "${sources[@]}"; do
 	source "$ZDOTDIR/include/${s}.zsh"
 done
 
-# Find a better place to insert these?
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-. "$HOME/.local/share/../bin/env"
+# zsh plugins and uv env: source only if present, so a fresh shell never errors.
+zsh_autosuggestions="/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+zsh_syntax_highlighting="/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[[ -f "$zsh_autosuggestions" ]] && source "$zsh_autosuggestions"
+[[ -f "$zsh_syntax_highlighting" ]] && source "$zsh_syntax_highlighting"
+[[ -f "$HOME/.local/bin/env" ]] && source "$HOME/.local/bin/env"

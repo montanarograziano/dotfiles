@@ -3,22 +3,22 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[user]
-	name = montanarograziano
-	email = 40232320+montanarograziano@users.noreply.github.com
-	signingkey = /Users/graziano/.ssh/gitkey.pub
-[github]
-  user = montanarograziano
 [core]
-    editor = vim
+	editor = vim
 [init]
-  defaultBranch = main
+	defaultBranch = main
 [push]
-  autoSetupRemote = true
+	autoSetupRemote = true
 [merge]
-  conflictstyle = zdiff3
+	conflictstyle = zdiff3
 [pull]
-  rebase = true
+	rebase = true
 [fetch]
-    prune = true
-
+	prune = true
+# Personal identity (name, email, GitHub handle, signing key) is kept in an
+# untracked local file so it never gets committed. Copy
+# git/local.gitconfig.example to ~/.config/git/local.gitconfig and edit it
+# (install.sh does this automatically on first run). Missing includes are
+# silently ignored by git.
+[include]
+	path = ~/.config/git/local.gitconfig

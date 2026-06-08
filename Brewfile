@@ -1,5 +1,3 @@
-tap "homebrew/bundle"
-tap "homebrew/services"
 tap "oven-sh/bun"
 
 brew "htop"
@@ -26,6 +24,10 @@ brew "starship"
 brew "wget"
 # JS runtime builder
 brew "oven-sh/bun/bun"
+# Fish-like autosuggestions for zsh (sourced by .zshrc)
+brew "zsh-autosuggestions"
+# Syntax highlighting for zsh (sourced by .zshrc)
+brew "zsh-syntax-highlighting"
 
 
 
@@ -33,6 +35,8 @@ brew "oven-sh/bun/bun"
 cask "appcleaner"
 # Voice and text chat software
 cask "discord"
+# Team chat
+cask "slack"
 cask "spotify"
 cask "whatsapp"
 cask "telegram"
@@ -51,24 +55,26 @@ cask "github"
 cask "jetbrains-toolbox"
 # Clipboard manager
 cask "maccy"
+# Window manager (move/resize windows via shortcuts)
+cask "rectangle"
 # Tool to control external monitor brightness & volume
 cask "monitorcontrol"
 # Screen Recording
 cask "obs"
 # Serve LLM locally
-cask "ollama"
+cask "ollama-app"
 # IDE
 cask "visual-studio-code"
 # Password manager
 cask "1password"
 # Docker Desktop
-cask "docker"
+cask "docker-desktop"
 # DisplayLink Manager
 cask "displaylink"
 # Onedrive
 cask "onedrive"
 # Logi Options +
-cask "logi-options"
+cask "logi-options+"
 # Chrome
 cask "google-chrome"
 # Firefox

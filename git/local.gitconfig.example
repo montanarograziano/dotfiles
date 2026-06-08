@@ -1,0 +1,21 @@
+# Default git identity for this machine. Copy to ~/.config/git/local.gitconfig
+# (install.sh does this on first run) and fill in your details. The local copy
+# is gitignored, so your identity is never committed.
+#
+# On a work-only machine this default is your WORK account. The personal
+# dotfiles repo at ~/.config overrides it via the includeIf rule below.
+[user]
+	name = Your Work Name
+	email = you@company.com
+[core]
+	# SSH key used to authenticate work repos. Selected automatically by repo
+	# location, so you clone with normal git@github.com:org/repo.git URLs.
+	# Generate one with:
+	#   ssh-keygen -t ed25519 -f ~/.ssh/work -C "you@company.com"
+	sshCommand = ssh -i ~/.ssh/work -o IdentitiesOnly=yes
+
+# The personal dotfiles repo (~/.config) commits and authenticates with your
+# PERSONAL account instead of the work default above. Add more includeIf rules
+# (e.g. gitdir:~/personal/) if you keep personal projects elsewhere.
+[includeIf "gitdir:~/.config/"]
+	path = ~/.config/git/personal.gitconfig
