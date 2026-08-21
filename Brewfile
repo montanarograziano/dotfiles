@@ -20,6 +20,8 @@ brew "git-lfs"
 brew "just"
 # Modern and fast prompt
 brew "starship"
+# AI coding agent CLI (config ported via pi/agent/settings.json)
+brew "pi-coding-agent"
 # wget
 brew "wget"
 # JS runtime builder

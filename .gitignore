@@ -20,3 +20,31 @@ git/*
 !git/*.example
 uv/uv-receipt.json
 homebrew/
+
+# gcloud
+gcloud/
+
+# pi coding agent: only the portable settings are tracked (see pi/).
+# Everything else (auth, sessions, memory, npm cache, model cache) is
+# machine-local/secret and lives in ~/.pi, outside this repo.
+pi/*
+!pi/agent
+!pi/web-search.json
+pi/agent/*
+!pi/agent/settings.json
+
+# app state/caches that don't belong in dotfiles (secrets, sockets, logs,
+# node_modules, local DBs). Add the underlying tool's real config file
+# explicitly above if it's ever worth tracking.
+.semgrep/
+cagent/
+configstore/
+glab-cli/
+helm/
+herdr/
+k9s/
+notion/
+opencode/
+swiftpm/
+tool_state
+zed/

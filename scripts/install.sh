@@ -53,6 +53,21 @@ for example in "$REPO_DIR"/git/*.example(N); do
     fi
 done
 
+# Symlink the pi coding agent's portable settings into ~/.pi/agent.
+# Everything else there (auth, sessions, memory, caches) is machine-local
+# and never tracked by this repo.
+PI_SETTINGS_SRC="$REPO_DIR/pi/agent/settings.json"
+PI_SETTINGS_DST="$HOME/.pi/agent/settings.json"
+if [[ -f "$PI_SETTINGS_SRC" ]]; then
+    mkdir -p "$HOME/.pi/agent"
+    if [[ -e "$PI_SETTINGS_DST" && ! -L "$PI_SETTINGS_DST" ]]; then
+        mv "$PI_SETTINGS_DST" "$PI_SETTINGS_DST.bak"
+        echo "✔︎ Backed up existing pi settings.json to '$PI_SETTINGS_DST.bak'."
+    fi
+    ln -sfn "$PI_SETTINGS_SRC" "$PI_SETTINGS_DST"
+    echo "✔︎ Linked pi agent settings.json to '$PI_SETTINGS_DST'."
+fi
+
 echo "Installing dev tools (uv, Python, Rust) and configuring ZDOTDIR..."
 run_script "$SCRIPT_DIR/tools.sh"
 

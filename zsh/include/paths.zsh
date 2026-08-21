@@ -1,8 +1,10 @@
 paths=(
     "${HOME}/.local/bin"
+    "${HOME}/.docker/bin"
     "$HOME/.local/share/../bin/env"
     "${XDG_DATA_HOME}/bob/nvim-bin"
     "${XDG_DATA_HOME}/jetbrains/bin"
+    "/usr/local/bin"
     "/usr/bin"
     "/bin"
     "/usr/sbin"
