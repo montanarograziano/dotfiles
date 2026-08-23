@@ -9,7 +9,17 @@
 # (never "../Brewfile", which would point outside the chezmoi source dir).
 #
 # Non-interactive: safe to run unattended during `chezmoi apply`, unlike
-# the legacy scripts/brew.sh which prompted for confirmation.
+# the legacy scripts/brew.sh which prompted for confirmation. Deliberately
+# no prompt for the cask skip below either: this script re-runs on every
+# Brewfile change, so a prompt would block unattended applies. Use the env
+# var instead.
+#
+#   DOTFILES_SKIP_CASKS=1 chezmoi apply
+#
+# Skips all `cask` entries, installs formulae only. Intended for disk- or
+# bandwidth-constrained throwaway machines (VM smoke tests), where 45 GUI
+# casks are ~30GB of download that proves nothing the host hasn't already
+# checked with `brew bundle check`. Not for real machines.
 set -euo pipefail
 
 export PATH="/opt/homebrew/bin:$PATH"
@@ -21,7 +31,20 @@ if [[ ! -f "$BREWFILE" ]]; then
     exit 0
 fi
 
+if [[ "${DOTFILES_SKIP_CASKS:-0}" == "1" ]]; then
+    # HOMEBREW_BUNDLE_CASK_SKIP takes a space-separated list of cask names,
+    # not a boolean, so build it from the Brewfile itself. Stays correct as
+    # casks are added/removed; nothing to keep in sync by hand.
+    HOMEBREW_BUNDLE_CASK_SKIP="$(sed -n 's/^cask "\([^"]*\)".*/\1/p' "$BREWFILE" | tr '\n' ' ')"
+    export HOMEBREW_BUNDLE_CASK_SKIP
+    echo "DOTFILES_SKIP_CASKS=1: skipping $(wc -w <<<"$HOMEBREW_BUNDLE_CASK_SKIP" | tr -d ' ') casks, formulae only."
+fi
+
 echo "Installing Homebrew packages from '$BREWFILE'..."
+# Progress note: Homebrew only renders its live download display when stdout
+# is a TTY. Piping this script through `| tee` silences it and makes a long
+# parallel fetch look hung. Use `script -q out.log ./bootstrap.sh` instead,
+# which keeps a pty and still writes the log.
 # A single failing entry (e.g. a cask that needs a reboot or an interactive
 # installer) should not abort the whole chezmoi apply run.
 if brew bundle --file="$BREWFILE"; then
