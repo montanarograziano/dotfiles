@@ -1,11 +1,10 @@
 histfile="${XDG_CACHE_HOME:-"$HOME/.cache"}/zsh/history"
 
-if [ -f "$histfile" ]; then
-	touch "$histfile"
-fi
+mkdir -p "${histfile:h}"
+touch "$histfile"
 
 export HISTFILE="$histfile"
-export HISTIZE=1000000
+export HISTSIZE=1000000
 export HISTFILESIZE=1000000
 export SAVEHIST=1000000
 
@@ -35,8 +34,8 @@ setopt HIST_FIND_NO_DUPS
 # removes blank lines from history
 setopt HIST_REDUCE_BLANKS
 
-bindkey ';5C' forward-word
-bindkey ';5D' backward-word
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
 
 
 zmodload zsh/complist

@@ -1,31 +1,22 @@
 #!/usr/bin/env zsh
+# run_onchange_after: install/upgrade dev tooling (uv, Python, global CLI
+# tools, Rust). Re-runs automatically whenever this script's content
+# changes (e.g. a Python version or tool is added/removed below).
+#
+# Based on the legacy scripts/tools.sh, minus its /etc/zshenv ZDOTDIR
+# wiring (that system-wide, sudo-requiring step is being retired; see
+# run_once_after_40-remove-legacy-zshenv-zdotdir.sh).
 set -euo pipefail
 
-# Default XDG dirs so a standalone run (before the zsh config is loaded)
-# doesn't trip `set -u` further down (e.g. the Rust setup below).
+# Default XDG dirs so a standalone run (before dot_config/zsh is sourced)
+# doesn't trip `set -u` further down (e.g. the Rust setup).
 : "${XDG_DATA_HOME:=$HOME/.local/share}"
 
-# Set the desired ZDOTDIR configuration
-ZDOTDIR_LINE='export ZDOTDIR="$HOME/.config/zsh"'
-ZSHENV_FILE="/etc/zshenv"
+# Homebrew and uv both need to be on PATH; a fresh chezmoi apply run may
+# not have sourced any shell rc yet.
+export PATH="/opt/homebrew/bin:$HOME/.local/bin:$PATH"
 
-echo "Configuring ZDOTDIR in '/etc/zshenv'..."
-
-if [[ -f "$ZSHENV_FILE" ]]; then
-    if ! grep -qF "$ZDOTDIR_LINE" "$ZSHENV_FILE"; then
-        echo "$ZDOTDIR_LINE" | sudo tee -a "$ZSHENV_FILE" >/dev/null
-        echo "✔︎ Appended '$ZDOTDIR_LINE' to '$ZSHENV_FILE'."
-    else
-        echo "✔︎ '$ZDOTDIR_LINE' is already present in '$ZSHENV_FILE'."
-    fi
-else
-    echo "$ZDOTDIR_LINE" | sudo tee "$ZSHENV_FILE" >/dev/null
-    echo "✔︎ Created '$ZSHENV_FILE' and added '$ZDOTDIR_LINE'."
-fi
-
-# Install uv tool
 echo "Installing uv (https://github.com/astral-sh/uv#uv)..."
-
 if ! command -v uv &>/dev/null; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
     echo "✔︎ uv installed successfully."
@@ -33,19 +24,18 @@ else
     echo "✔︎ uv is already installed."
 fi
 
-# uv installs to ~/.local/bin, which isn't on PATH yet during a fresh run.
-# Add it so the Python steps below can find uv.
+# uv installs to ~/.local/bin; make sure the rest of this script finds it.
 export PATH="$HOME/.local/bin:$PATH"
 
-# Define Python versions to install
+# Supported (non end-of-life) Python versions. 3.9 reached EOL and was
+# dropped; 3.13 is the current stable release.
 PYTHON_VERSIONS=(
+    "3.13"
     "3.12"
     "3.11"
     "3.10"
-    "3.9"
 )
 
-# Install specified Python versions using uv
 echo "Installing Python versions with uv..."
 for version in "${PYTHON_VERSIONS[@]}"; do
     if uv python install -- "$version"; then
@@ -55,19 +45,20 @@ for version in "${PYTHON_VERSIONS[@]}"; do
     fi
 done
 
-# Define Python CLI tools to install globally with `uv tool`.
-# Only packages that expose executables belong here. Libraries like ipykernel
-# provide no entrypoint and must be added per-project (e.g. `uv add ipykernel`).
+# Python CLI tools installed globally with `uv tool`. Only packages that
+# expose executables belong here. Libraries like ipykernel provide no
+# entrypoint and must be added per-project (e.g. `uv add ipykernel`).
 PYTHON_LIBRARIES=(
     "commitizen"
     "cookiecutter"
+    "marimo"
     "mypy"
     "pytest"
     "ruff"
     "pre-commit"
 )
 
-# Use the first Python version as the "safe" version
+# Use the first (newest) Python version as the "safe" version for tools.
 SAFE_VERSION="${PYTHON_VERSIONS[1]}"
 echo "Installing Python libraries using uv (safe version: $SAFE_VERSION)..."
 
@@ -79,23 +70,23 @@ for lib in "${PYTHON_LIBRARIES[@]}"; do
     fi
 done
 
-# Set Rust environment variables
+# Rust environment variables, derived from XDG_DATA_HOME so nothing here is
+# hardcoded independently of dot_config/zsh (which sources the same paths).
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
-# Install Rust if not already installed
 echo "Checking for Rust installation..."
 if ! command -v rustup &>/dev/null; then
     echo "Installing Rust..."
     # --no-modify-path: don't let rustup append a hardcoded cargo-env line to
-    # shell startup files; zsh/.zshenv already sources it generically.
+    # shell startup files; dot_config/zsh already sources it generically.
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
     echo "✔︎ Rust installed successfully."
 else
     echo "✔︎ Rust is already installed."
 fi
 
-# rustup/cargo install into $CARGO_HOME/bin, which isn't on PATH yet in this run.
+# rustup/cargo install into $CARGO_HOME/bin, which isn't on PATH yet here.
 export PATH="$CARGO_HOME/bin:$PATH"
 
 echo "Setting up Rust stable version and rust-analyzer..."
@@ -103,4 +94,4 @@ rustup install stable
 rustup component add rust-analyzer --toolchain=stable
 echo "✔︎ Rust and rust-analyzer setup completed."
 
-echo "✔︎ Script completed successfully!"
+echo "✔︎ Dev tools setup completed successfully!"

@@ -1,9 +1,13 @@
 tap "oven-sh/bun"
+tap "anomalyco/tap"
+tap "derailed/k9s"
 
 brew "htop"
 brew "btop"
 brew "curl"
 brew "eza"
+# Dotfiles manager (drives scripts/bootstrap.sh and home/run_*)
+brew "chezmoi"
 # Docker CLI plugin for extended build capabilities with BuildKit
 brew "docker-buildx"
 # Isolated development environments using Docker
@@ -20,7 +24,7 @@ brew "git-lfs"
 brew "just"
 # Modern and fast prompt
 brew "starship"
-# AI coding agent CLI (config ported via pi/agent/settings.json)
+# AI coding agent CLI (config managed via home/dot_pi/agent/settings.json -> ~/.pi/agent/settings.json)
 brew "pi-coding-agent"
 # wget
 brew "wget"
@@ -30,6 +34,30 @@ brew "oven-sh/bun/bun"
 brew "zsh-autosuggestions"
 # Syntax highlighting for zsh (sourced by .zshrc)
 brew "zsh-syntax-highlighting"
+# iOS/macOS dependency manager
+brew "cocoapods"
+# Kubernetes CLI
+brew "kubernetes-cli"
+# Kubernetes cluster TUI
+brew "derailed/k9s/k9s"
+# Kubernetes package manager
+brew "helm"
+# Container engine (Docker alternative)
+brew "podman"
+# Audio/video conversion toolkit
+brew "ffmpeg"
+# In-process analytical database
+brew "duckdb"
+# Python
+brew "python@3.13"
+# Secrets scanner
+brew "gitleaks"
+# GitLab CLI
+brew "glab"
+# Terminal multiplexer for coding agents
+brew "herdr"
+# AI coding agent CLI
+brew "anomalyco/tap/opencode"
 
 
 
@@ -87,3 +115,33 @@ cask "adobe-acrobat-reader"
 cask "vlc"
 # Twingate (vpn manager)
 cask "twingate"
+# Window switcher (Alt+Tab style)
+cask "alt-tab"
+# External display control
+cask "betterdisplay"
+# Prevent sleep
+cask "caffeine"
+# Claude desktop app
+cask "claude"
+# Claude Code app
+cask "claude-code"
+# OpenAI Codex app
+cask "codex"
+# Flutter SDK
+cask "flutter"
+# Font
+cask "font-carlito"
+# Google Cloud CLI
+cask "gcloud-cli"
+# Jabra headset manager
+cask "jabra-direct"
+# Notion
+cask "notion"
+# OpenCode desktop app
+cask "opencode-desktop"
+# Podman Desktop
+cask "podman-desktop"
+# Java (Eclipse Temurin)
+cask "temurin"
+# Zed editor
+cask "zed"

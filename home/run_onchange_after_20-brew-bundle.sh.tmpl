@@ -1,0 +1,31 @@
+#!/bin/bash
+# Brewfile hash: {{ include "dot_config/Brewfile" | sha256sum }}
+#
+# run_onchange_after: install Homebrew packages from the repo's Brewfile.
+# The hash comment above embeds the Brewfile's contents, so chezmoi re-runs
+# this script automatically whenever Brewfile changes. The file is a
+# regular chezmoi-managed dotfile at home/dot_config/Brewfile, applied to
+# $HOME/.config/Brewfile; the hash is read via a source-relative path
+# (never "../Brewfile", which would point outside the chezmoi source dir).
+#
+# Non-interactive: safe to run unattended during `chezmoi apply`, unlike
+# the legacy scripts/brew.sh which prompted for confirmation.
+set -euo pipefail
+
+export PATH="/opt/homebrew/bin:$PATH"
+
+BREWFILE="$HOME/.config/Brewfile"
+
+if [[ ! -f "$BREWFILE" ]]; then
+    echo "⚠️ Brewfile not found at '$BREWFILE'. Skipping." >&2
+    exit 0
+fi
+
+echo "Installing Homebrew packages from '$BREWFILE'..."
+# A single failing entry (e.g. a cask that needs a reboot or an interactive
+# installer) should not abort the whole chezmoi apply run.
+if brew bundle --no-lock --file="$BREWFILE"; then
+    echo "✔︎ All Brewfile dependencies installed."
+else
+    echo "⚠️ Some Brewfile dependencies failed. Review the output above and re-run: brew bundle --file=\"$BREWFILE\"" >&2
+fi

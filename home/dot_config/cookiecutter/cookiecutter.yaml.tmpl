@@ -1,14 +1,14 @@
 # see https://cookiecutter.readthedocs.io/en/2.0.2/advanced/user_config.html
 default_context:
-  author_name: "Your Name"
-  author_email: "you@example.com"
-  author_github_handle: "your-github-handle"
+  author_name: "{{ .personal.name }}"
+  author_email: "{{ .personal.email }}"
+  author_github_handle: "{{ .personal.github }}"
   author_job_title: "Your Job Title"
   requires_python: "3.10"
-cookiecutters_dir: "$XDG_CACHE_HOME/cookiecutters/"
+cookiecutters_dir: "{{ env "XDG_CACHE_HOME" | default (printf "%s/.cache" .chezmoi.homeDir) }}/cookiecutters/"
 abbreviations:
   # gh (github), bb (bitbucket), and gl (gitlab) abbreviations are  builtin
   gh: https://github.com/{0}
-  # personal cookiecutters (replace the handle with your own)
-  me: https://github.com/your-github-handle/{0}
+  # personal cookiecutters
+  me: https://github.com/{{ .personal.github }}/{0}
   uv: https://github.com/fpgmaas/cookiecutter-uv

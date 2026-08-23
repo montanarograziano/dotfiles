@@ -1,0 +1,12 @@
+{{- $workName := promptStringOnce . "work.name" "Work git name" -}}
+{{- $workEmail := promptStringOnce . "work.email" "Work git email" -}}
+{{- $personalName := promptStringOnce . "personal.name" "Personal git name" -}}
+{{- $personalEmail := promptStringOnce . "personal.email" "Personal git email" -}}
+{{- $personalGitHub := promptStringOnce . "personal.github" "Personal GitHub handle" -}}
+[data.work]
+    name = {{ $workName | quote }}
+    email = {{ $workEmail | quote }}
+[data.personal]
+    name = {{ $personalName | quote }}
+    email = {{ $personalEmail | quote }}
+    github = {{ $personalGitHub | quote }}

@@ -15,23 +15,45 @@ jupyter
 .zsh_sessions
 
 # machine-local / generated state (never commit identity or install receipts)
-# Track only the git/*.example templates; real per-context configs stay local.
-git/*
-!git/*.example
+/git/
 uv/uv-receipt.json
 homebrew/
 
 # gcloud
 gcloud/
 
-# pi coding agent: only the portable settings are tracked (see pi/).
-# Everything else (auth, sessions, memory, npm cache, model cache) is
-# machine-local/secret and lives in ~/.pi, outside this repo.
-pi/*
-!pi/agent
-!pi/web-search.json
-pi/agent/*
-!pi/agent/settings.json
+# chezmoi's own local state: its config file (chezmoi.toml, holding the
+# machine-local prompted git identity data from home/.chezmoi.toml.tmpl)
+# and autosave data. Not the chezmoi source state, which lives in home/.
+/chezmoi/
+
+# caddy: machine-local runtime state (e.g. autosave.json), not tracked here.
+/caddy/
+
+# pi coding agent state (auth, sessions, memory, npm cache, model cache) is
+# machine-local/secret and lives in ~/.pi, outside this repo. Portable
+# settings now live under home/dot_pi/ in the chezmoi source state.
+/pi/
+
+# legacy root-level dotfiles superseded by home/ (chezmoi source state).
+# Untracked from the repo but kept live on disk while this checkout is
+# ~/.config itself; leading slashes anchor these to the repo root so the
+# same-named dirs under home/dot_config/ stay tracked. See README.
+/.gitconfig
+/.gitignore.global
+/Brewfile
+/btop/
+/cookiecutter/
+/fish/
+/ghostty/
+/htop/
+/jgit/
+/marimo/
+/neofetch/
+/starship/
+/vim/
+/wallpapers/
+/zsh/
 
 # app state/caches that don't belong in dotfiles (secrets, sockets, logs,
 # node_modules, local DBs). Add the underlying tool's real config file
@@ -48,3 +70,8 @@ opencode/
 swiftpm/
 tool_state
 zed/
+
+# runtime/secret/machine state: never commit
+.wrangler/
+.opengrep/
+containers/

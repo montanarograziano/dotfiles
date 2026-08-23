@@ -1,0 +1,17 @@
+export ZDOTDIR="$HOME/.config/zsh"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+# Rust/cargo env: RUSTUP_HOME/CARGO_HOME must be set before sourcing
+# cargo/env below, otherwise rustup/cargo fall back to their default
+# ~/.rustup and ~/.cargo instead of the XDG locations used everywhere else
+# in this repo (see home/run_onchange_after_30-dev-tools.sh, which installs
+# into these same paths).
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+
+# Rust/cargo env (guarded so shells without Rust don't error)
+[[ -f "$XDG_DATA_HOME/cargo/env" ]] && . "$XDG_DATA_HOME/cargo/env"

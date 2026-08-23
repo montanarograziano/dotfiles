@@ -1,0 +1,40 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	editor = vim
+	excludesFile = ~/.config/git/ignore
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[merge]
+	conflictstyle = zdiff3
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[user]
+	useConfigOnly = true
+
+# Identity is chosen per repo location, never guessed from the system.
+# Files below are created once (chezmoi create_) and are never overwritten,
+# so local edits survive `chezmoi apply`.
+[includeIf "gitdir:~/workspace/intella/"]
+	path = ~/.config/git/work.gitconfig
+[includeIf "gitdir:~/workspace/personal/"]
+	path = ~/.config/git/personal.gitconfig
+# Chezmoi source repo: default location, plus the transitional/current one
+# (~/.config itself, while .chezmoiroot points chezmoi at home/ inside it).
+[includeIf "gitdir:~/.local/share/chezmoi/"]
+	path = ~/.config/git/personal.gitconfig
+[includeIf "gitdir:~/.config/"]
+	path = ~/.config/git/personal.gitconfig
+
+[credential]
+	helper =
+	helper = manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true

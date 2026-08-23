@@ -1,0 +1,10 @@
+# PERSONAL identity, applied under ~/workspace/personal/, the default
+# dotfiles source at ~/.local/share/chezmoi/, and the transitional/current
+# dotfiles source at ~/.config/ (see ~/.gitconfig).
+# Created once by chezmoi; edit freely, `chezmoi apply` will not overwrite it.
+[user]
+	name = {{ .personal.name }}
+	email = {{ .personal.email }}
+[github]
+	user = {{ .personal.github }}
+# SSH keys are selected per-host by ~/.ssh/config, not here.

@@ -1,0 +1,9 @@
+" Minimal vimrc: no plugin manager, nothing to auto-install.
+" Add a plugin manager back deliberately (and its own install step) if/when
+" plugins are actually needed.
+
+syntax on
+set number
+
+" Reasonable indentation
+set expandtab tabstop=4 shiftwidth=4 softtabstop=4

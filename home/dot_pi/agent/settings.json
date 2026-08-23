@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "0.84.2",
   "theme": "dark",
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-sonnet-5",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "medium",
   "packages": [
     "npm:pi-claude-auth",
@@ -16,6 +16,11 @@
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-zentui",
     "npm:pi-hermes-memory",
-    "npm:@porche/pi-usage"
+    "npm:@porche/pi-usage",
+    "npm:@javargasm/pi-usage-bars",
+    "npm:pi-playwright",
+    "npm:pi-image-tools",
+    "npm:@yeliu84/pi-model-router",
+    "npm:pi-free"
   ]
 }
