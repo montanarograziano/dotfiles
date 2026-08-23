@@ -26,11 +26,8 @@
 	path = ~/.config/git/work.gitconfig
 [includeIf "gitdir:~/workspace/personal/"]
 	path = ~/.config/git/personal.gitconfig
-# Chezmoi source repo: default location, plus the transitional/current one
-# (~/.config itself, while .chezmoiroot points chezmoi at home/ inside it).
+# Chezmoi source repo.
 [includeIf "gitdir:~/.local/share/chezmoi/"]
-	path = ~/.config/git/personal.gitconfig
-[includeIf "gitdir:~/.config/"]
 	path = ~/.config/git/personal.gitconfig
 
 [credential]

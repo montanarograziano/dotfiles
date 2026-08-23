@@ -45,7 +45,15 @@ defaults write com.apple.screencapture location -string "${HOME}/Desktop"
 # Dark theme, per-user (no sudo needed for this key)
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 
-# Enable tap-to-click
+# Enable tap-to-click. Two SEPARATE domains, both required:
+#   com.apple.AppleMultitouchTrackpad ................ built-in (MacBook) trackpad
+#   com.apple.driver.AppleBluetoothMultitouch.trackpad  external Magic Trackpad
+# Only the Bluetooth one was set here originally, so tap-to-click silently
+# never worked on a laptop's own trackpad (verified: the built-in domain read
+# Clicking = 0 on a machine where this script had already run). The
+# NSGlobalDomain tapBehavior writes make the setting stick across logins;
+# -currentHost and plain are both needed, they are different scopes.
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
