@@ -26,6 +26,16 @@ if ! command -v uv &>/dev/null; then
     # ~/.local/bin/env when present, and dot_config/fish/conf.d/uv.env.fish
     # does the fish equivalent. PATH for the rest of THIS script is exported
     # below, independently of any rc file.
+    #
+    # Expect a spurious "WARN: The following commands are shadowed by other
+    # commands in your PATH: uv uvx". It is uv shadowing ITSELF and is safe to
+    # ignore. The installer derives its install dir from $XDG_DATA_HOME/../bin
+    # (unnormalized, because dot_zshenv sets XDG_DATA_HOME) and then does a
+    # plain STRING compare of that against `command -v uv`, which returns the
+    # resolved ~/.local/bin/uv. Same file, different strings, so it always
+    # warns. Verify with `which -a uv`: one entry means there is no real
+    # shadow. Setting UV_INSTALL_DIR would silence it but changes the install
+    # path on every machine to fix a cosmetic upstream bug -- not worth it.
     curl -LsSf https://astral.sh/uv/install.sh | UV_NO_MODIFY_PATH=1 sh
     echo "✔︎ uv installed successfully."
 else
