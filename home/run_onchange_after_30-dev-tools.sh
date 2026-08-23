@@ -18,7 +18,15 @@ export PATH="/opt/homebrew/bin:$HOME/.local/bin:$PATH"
 
 echo "Installing uv (https://github.com/astral-sh/uv#uv)..."
 if ! command -v uv &>/dev/null; then
-    curl -LsSf https://astral.sh/uv/install.sh | sh
+    # UV_NO_MODIFY_PATH=1: by default the installer edits shell rc files to
+    # add ~/.local/bin to PATH, targeting .zshrc, .zshenv and
+    # .config/fish/conf.d/uv.env.fish -- all three chezmoi-managed here. That
+    # left every fresh install with immediate `chezmoi status` drift, and the
+    # edits are redundant: dot_config/zsh/dot_zshrc already sources
+    # ~/.local/bin/env when present, and dot_config/fish/conf.d/uv.env.fish
+    # does the fish equivalent. PATH for the rest of THIS script is exported
+    # below, independently of any rc file.
+    curl -LsSf https://astral.sh/uv/install.sh | UV_NO_MODIFY_PATH=1 sh
     echo "✔︎ uv installed successfully."
 else
     echo "✔︎ uv is already installed."
