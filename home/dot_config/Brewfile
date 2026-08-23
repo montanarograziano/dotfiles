@@ -1,6 +1,13 @@
-tap "oven-sh/bun"
-tap "anomalyco/tap"
-tap "derailed/k9s"
+# Third-party taps must be explicitly trusted before Homebrew will load their
+# formulae ('Error: Refusing to load formula ... from untrusted tap'). On this
+# machine that trust was granted interactively long ago and lived only in the
+# local trust store, so a fresh install aborted the ENTIRE brew bundle run at
+# the first tapped formula and installed nothing. Declaring it here makes the
+# grant reproducible. Trust is scoped to the specific formulae actually used,
+# not the whole tap, so a tap adding a new formula later does not inherit it.
+tap "oven-sh/bun", trusted: { formulae: ["bun"] }
+tap "anomalyco/tap", trusted: { formulae: ["opencode"] }
+tap "derailed/k9s", trusted: { formulae: ["k9s"] }
 
 brew "htop"
 brew "btop"
