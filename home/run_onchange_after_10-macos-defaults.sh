@@ -71,12 +71,20 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-# Dock: show instantly on hover.
+# Dock: auto-hide, and show instantly on hover.
+#   autohide               = hide the Dock until the pointer reaches its edge
 #   autohide-delay         = pause before the Dock slides in (0 = no pause)
 #   autohide-time-modifier = slide animation speed (0.15 = fast, 0 = instant)
+# The two timing keys are INERT unless autohide is on, so it's set here
+# rather than assumed: this machine only had it enabled because it had been
+# switched on by hand years earlier, which a fresh install would not
+# reproduce.
 # Revert with:
+#   defaults write com.apple.dock autohide -bool false
 #   defaults delete com.apple.dock autohide-delay
 #   defaults delete com.apple.dock autohide-time-modifier
+#   killall Dock
+defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0.15
 
