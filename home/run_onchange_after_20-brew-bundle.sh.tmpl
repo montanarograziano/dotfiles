@@ -24,7 +24,7 @@ fi
 echo "Installing Homebrew packages from '$BREWFILE'..."
 # A single failing entry (e.g. a cask that needs a reboot or an interactive
 # installer) should not abort the whole chezmoi apply run.
-if brew bundle --no-lock --file="$BREWFILE"; then
+if brew bundle --file="$BREWFILE"; then
     echo "✔︎ All Brewfile dependencies installed."
 else
     echo "⚠️ Some Brewfile dependencies failed. Review the output above and re-run: brew bundle --file=\"$BREWFILE\"" >&2
