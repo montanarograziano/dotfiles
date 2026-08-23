@@ -53,6 +53,19 @@ defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 # Clicking = 0 on a machine where this script had already run). The
 # NSGlobalDomain tapBehavior writes make the setting stick across logins;
 # -currentHost and plain are both needed, they are different scopes.
+#
+# Takes effect at NEXT LOGIN, not immediately. `killall cfprefsd` below
+# flushes the preferences cache but does not make the HID/trackpad driver
+# re-read it, so on a machine you're applying to live, System Settings will
+# correctly show tap-to-click enabled while tapping still does nothing until
+# you log out (or toggle the switch in System Settings by hand, which sends
+# the runtime notification). Verified on Tahoe 26.5.2 / Mac17,2: toggling
+# that switch changes NO defaults keys at all, so there is nothing further
+# to script here. On a fresh machine this is a non-issue, bootstrap runs and
+# you log in afterwards.
+#
+# The Bluetooth line is a no-op unless a Magic Trackpad is actually paired.
+# Kept because it's idempotent and covers that case if you ever pair one.
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
