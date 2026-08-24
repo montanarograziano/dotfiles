@@ -56,7 +56,7 @@ brew "ffmpeg"
 # In-process analytical database
 brew "duckdb"
 # Python
-brew "python@3.13"
+brew "python@3.14"
 # Secrets scanner
 brew "gitleaks"
 # GitLab CLI

@@ -46,8 +46,9 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 
 # Supported (non end-of-life) Python versions. 3.9 reached EOL and was
-# dropped; 3.13 is the current stable release.
+# dropped; 3.14 is the current stable release.
 PYTHON_VERSIONS=(
+    "3.14"
     "3.13"
     "3.12"
     "3.11"
