@@ -1,6 +1,6 @@
 {
   "lastChangelogVersion": "0.84.2",
-  "theme": "dark",
+  "theme": "slop",
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-5",
   "defaultThinkingLevel": "medium",
@@ -17,10 +17,33 @@
     "npm:pi-zentui",
     "npm:pi-hermes-memory",
     "npm:@porche/pi-usage",
-    "npm:@javargasm/pi-usage-bars",
     "npm:pi-playwright",
     "npm:pi-image-tools",
     "npm:@yeliu84/pi-model-router",
-    "npm:pi-free"
+    "npm:pi-free",
+    "npm:@ff-labs/pi-fff",
+    {
+      "source": "npm:@adrianapan/pikit",
+      "extensions": [
+        "agent/extensions/artifacts/index.ts",
+        "agent/extensions/caveman/index.ts",
+        "agent/extensions/chat-input/index.ts",
+        "agent/extensions/env-loader/index.ts",
+        "agent/extensions/footer/index.ts",
+        "agent/extensions/llm-council/index.ts",
+        "agent/extensions/permission-gate/index.ts",
+        "agent/extensions/protected-paths/index.ts",
+        "agent/extensions/spinners/index.ts",
+        "agent/extensions/startup/index.ts",
+        "agent/extensions/styled-outputs/index.ts"
+      ],
+      "skills": [
+        "agent/skills/pi-extension-builder"
+      ],
+      "prompts": [],
+      "themes": [
+        "agent/themes/slop.json"
+      ]
+    }
   ]
 }

@@ -82,6 +82,7 @@ cask "font-fira-code-nerd-font"
 cask "font-meslo-lg-nerd-font"
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono"
+cask "font-jetbrains-mono-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # git credential manager

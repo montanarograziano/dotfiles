@@ -1,55 +1,41 @@
 "$schema" = 'https://starship.rs/config-schema.json'
-add_newline = true
+add_newline = false
+format = "$directory$git_branch$git_status$python$cmd_duration$line_break$character"
+
+[directory]
+style = "bold cyan"
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+format = " [$branch]($style)"
+style = "bold purple"
+
+[git_status]
+format = " [$all_status$ahead_behind]($style)"
+style = "bold yellow"
+
+[cmd_duration]
+min_time = 2000
+format = " took [$duration]($style)"
+style = "bold yellow"
+
+[python]
+format = ' [($virtualenv)]($style)'
+style = "bold green"
+
+[character]
+success_symbol = '[➜](bold green)'
+error_symbol = "[❯](bold red)"
 
 [aws]
 disabled = true
 
-[battery]
-full_symbol = "• "
-charging_symbol = "⇡ "
-discharging_symbol = "⇣ "
-unknown_symbol = "❓ "
-empty_symbol = "❗ "
+[gcloud]
 disabled = true
 
-[erlang]
-symbol = "ⓔ "
+[kubernetes]
+disabled = true
 
-[nodejs]
-symbol = "[⬢](bold green) "
-
-[pulumi]
-symbol = "🧊 "
-
-[typst]
-symbol = "t "
-
-# https://starship.rs/config/#package-version
 [package]
 disabled = true
-
-# # https://starship.rs/config/#character
-# Replace the '❯' symbol in the prompt with '➜'
-[kubernetes]
-symbol = "⎈ "
-format = '[$symbol$context( \($namespace\))]($style) '
-disabled = false
-
-[[kubernetes.contexts]]
-context_pattern = ".*prod.*"
-context_alias = "prod"
-style = "bold red"
-
-[[kubernetes.contexts]]
-context_pattern = ".*staging.*"
-context_alias = "staging"
-style = "bold yellow"
-
-[[kubernetes.contexts]]
-context_pattern = ".*dev.*"
-context_alias = "dev"
-style = "bold green"
-
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
-error_symbol = "[❯](bold red)"

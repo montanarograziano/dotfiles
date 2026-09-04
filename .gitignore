@@ -74,4 +74,4 @@ zed/
 # runtime/secret/machine state: never commit
 .wrangler/
 .opengrep/
-containers/
+containers/backups/

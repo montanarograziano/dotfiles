@@ -1,1 +1,32 @@
-theme = "Dracula+"
+# --- Theme ---
+theme = "GitLab Dark"
+
+# --- Font ---
+# font-family = JetBrainsMonoNL Nerd Font Propo
+font-family = "FiraCode Nerd Font Propo"
+font-size = 12
+font-thicken = false
+adjust-cell-height = 4
+
+# --- Window Chrome ---
+macos-titlebar-style = hidden
+macos-window-shadow = true
+window-padding-x = 16
+window-padding-y = 12
+window-padding-balance = true
+window-padding-color = background
+
+# --- Transparency + Blur ---
+background-opacity = 1
+background-blur = true
+macos-titlebar-style = transparent
+
+cursor-style = bar
+cursor-style-blink = true
+shell-integration = detect
+
+# --- macOS Icon ---
+macos-icon = custom-style
+macos-icon-ghost-color = #cba6f7
+macos-icon-screen-color = #1e1e2e,#313244
+macos-icon-frame = chrome
