@@ -258,25 +258,17 @@ On a machine where this checkout still lives at `~/.config` (see the cutover sec
 
 ## Updating Pi (coding agent) settings
 
-Pi (the `pi-coding-agent` Homebrew formula) reads two separate config files from two different roots, and they're managed differently on purpose:
+Pi reads two configuration files from different roots:
 
-- **Agent settings**, `~/.pi/agent/settings.json`, source `home/dot_pi/agent/create_settings.json`. Pi always resolves this from a fixed `~/.pi/agent/` path; it does not consult `$XDG_CONFIG_HOME`. It's a plain (non-templated) chezmoi-managed file, chezmoi writes a real file here, not a symlink. It uses the `create_` attribute on purpose: pi **rewrites this file itself** (`lastChangelogVersion` on upgrade, `defaultModel`/`defaultProvider` whenever you switch model in-session). Managed as an ordinary file it would drift permanently, and every `chezmoi apply` would silently revert your live model choice back to whatever was committed. `create_` means chezmoi writes it once on a fresh machine and never touches it again. The trade-off: changes to the committed `packages` list do **not** propagate to a machine that already has the file. Edit the live file there instead.
-- **Web search config**, `~/.config/pi/web-search.json`, source `home/dot_config/private_pi/private_web-search.json`. Pi's web-search feature *does* honor `$XDG_CONFIG_HOME`, which this repo's `home/dot_zshenv` sets to `~/.config`, so pi resolves this one under `~/.config/pi/`, not `~/.pi/`. The `private_` prefix is applied on **both** path components: the `private_pi` directory makes `~/.config/pi/` owner-only (`0700`), and the `private_web-search.json` file makes `~/.config/pi/web-search.json` itself owner-only (`0600`); `private_` never appears in the applied path, only in permissions. Don't move this file under `dot_pi/`, that would put it at the wrong path on any shell where `$XDG_CONFIG_HOME` is set, which is every shell this repo configures.
-
-Both are edited the same way:
+- **Agent settings**, `~/.pi/agent/settings.json`, source `home/dot_pi/agent/settings.json`. Pi always resolves this from `~/.pi/agent/`, independent of `$XDG_CONFIG_HOME`. This file is normally managed by chezmoi, so dotfiles are authoritative: edit the source with `chezmoi edit ~/.pi/agent/settings.json`, then run `chezmoi apply`. Pi also updates settings when you switch models or install/remove packages. To keep an intentional runtime change, run `chezmoi re-add ~/.pi/agent/settings.json` and commit the source change; otherwise the next `chezmoi apply` restores committed defaults.
+- **Web search config**, `~/.config/pi/web-search.json`, source `home/dot_config/private_pi/private_web-search.json`. Pi's web-search feature honors `$XDG_CONFIG_HOME`, which this repo sets to `~/.config`. The `private_` prefix makes both directory and file owner-only (`0700`/`0600`); it never appears in applied paths. Keep this file under `dot_config/`, not `dot_pi/`.
 
 ```sh
-chezmoi edit ~/.pi/agent/settings.json      # or: chezmoi edit ~/.config/pi/web-search.json
+chezmoi edit ~/.pi/agent/settings.json      # or ~/.config/pi/web-search.json
 chezmoi apply
-
-# or edit the live file directly, then pull the change back into source:
-$EDITOR ~/.pi/agent/settings.json
-chezmoi re-add ~/.pi/agent/settings.json    # safe: neither file is a template
-# note: for the create_ agent-settings file, re-add updates the SOURCE only.
-# It will still never be written back to an existing destination.
 ```
 
-Whichever you pick, commit the result from the source checkout (`chezmoi cd`, or directly in `~/.local/share/chezmoi` if you're not there already).
+Commit changes from the source checkout (`chezmoi cd`, or `~/.local/share/chezmoi`).
 
 A repo-root `pi/` directory may exist as a leftover on a `~/.config`-as-source machine, see [What is intentionally unmanaged](#what-is-intentionally-unmanaged), it is not where pi actually reads either file from.
 

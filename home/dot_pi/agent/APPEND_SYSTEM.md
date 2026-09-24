@@ -72,3 +72,11 @@ boilerplate (fragments are injected into the shell).
 For Chart.js pages: put each canvas in its own container div with an explicit
 height and `width: 100%`, and set `maintainAspectRatio: false` so charts fill
 the available width instead of stopping at their intrinsic size.
+
+## 6. Source Rationale
+
+Keep source comments for interface obligations, invariants, non-obvious failure modes,
+and security or concurrency constraints. Keep decision history in one authoritative
+ADR or domain document; link from code instead of repeating history. Tests state
+behavior and why an assertion matters. Prune stale rationale, but preserve
+load-bearing contracts and warnings.

@@ -1,26 +1,22 @@
 {
-  "lastChangelogVersion": "0.84.2",
+  "lastChangelogVersion": "0.87.1",
   "theme": "slop",
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-5",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-luna",
   "defaultThinkingLevel": "medium",
   "packages": [
     "npm:pi-claude-auth",
     "npm:pi-web-access",
     "npm:@dietrichgebert/ponytail",
     "npm:pi-herdr-subagents",
-    "npm:pi-lens",
     "npm:@k3_2o/pi-composio",
     "npm:pi-mcp-adapter",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@juicesharp/rpiv-todo",
-    "npm:pi-zentui",
     "npm:pi-hermes-memory",
     "npm:@porche/pi-usage",
     "npm:pi-playwright",
     "npm:pi-image-tools",
-    "npm:@yeliu84/pi-model-router",
-    "npm:pi-free",
     "npm:@ff-labs/pi-fff",
     {
       "source": "npm:@adrianapan/pikit",
@@ -31,8 +27,6 @@
         "agent/extensions/env-loader/index.ts",
         "agent/extensions/footer/index.ts",
         "agent/extensions/llm-council/index.ts",
-        "agent/extensions/permission-gate/index.ts",
-        "agent/extensions/protected-paths/index.ts",
         "agent/extensions/spinners/index.ts",
         "agent/extensions/startup/index.ts",
         "agent/extensions/styled-outputs/index.ts"
@@ -44,6 +38,7 @@
       "themes": [
         "agent/themes/slop.json"
       ]
-    }
+    },
+    "npm:pi-session-finder"
   ]
 }
